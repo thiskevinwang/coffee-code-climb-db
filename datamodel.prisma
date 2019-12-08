@@ -2,4 +2,12 @@ type User {
   id: ID! @id
   email: String @unique
   name: String!
+  comments: [Comment]
+}
+
+type Comment {
+  id: ID! @id
+  body: String!
+  author: User @relation(link: INLINE)
+  deleted: Boolean! @default(value: false)
 }
