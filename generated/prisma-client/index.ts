@@ -101,12 +101,19 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type UserOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "name_ASC"
+  | "name_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  email?: Maybe<String>;
 }>;
 
 export interface UserWhereInput {
@@ -124,6 +131,20 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -145,14 +166,17 @@ export interface UserWhereInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
+  email?: Maybe<String>;
   name: String;
 }
 
 export interface UserUpdateInput {
+  email?: Maybe<String>;
   name?: Maybe<String>;
 }
 
 export interface UserUpdateManyMutationInput {
+  email?: Maybe<String>;
   name?: Maybe<String>;
 }
 
@@ -173,11 +197,13 @@ export interface NodeNode {
 
 export interface User {
   id: ID_Output;
+  email?: String;
   name: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
   name: () => Promise<String>;
 }
 
@@ -185,6 +211,7 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
 }
 
@@ -192,6 +219,7 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
   name: () => Promise<String>;
 }
 
@@ -315,6 +343,7 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
+  email?: String;
   name: String;
 }
 
@@ -322,6 +351,7 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
   name: () => Promise<String>;
 }
 
@@ -329,6 +359,7 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
 }
 
